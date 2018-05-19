@@ -12,7 +12,7 @@ module Peano where
   axiom23 = λ ()
 
   axiom24 : {n m : ℕ} → (n ++) ≡ (m ++) → n ≡ m
-  axiom24 = {!!}
+  axiom24 refl = refl
 
   _+_ : ℕ → ℕ → ℕ -- Definition 2.2.1
   zero + m = m
