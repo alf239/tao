@@ -3,7 +3,7 @@ module Peano where
 
   data ℕ : Set where
     zero : ℕ -- Axiom 2.1. 0 is a natural number
-    _++ : ℕ → ℕ -- Axiom 2.2. If n is a natural number, then n+ is also a natural number
+    _++ : ℕ → ℕ -- Axiom 2.2. If n is a natural number, then n++ is also a natural number
 
   data _≡_ : ℕ → ℕ → Set where
     refl : {a : ℕ} → a ≡ a
