@@ -1,17 +1,23 @@
 module Peano where
+  open import IPL
+
   data ℕ : Set where
-    zero : ℕ         -- Axiom 2.1. 0 is a natural number
-    suc : ℕ → ℕ   -- Axiom 2.2. If n is a natural number, then n++ is also a natural number.
+    zero : ℕ -- Axiom 2.1. 0 is a natural number
+    _++ : ℕ → ℕ -- Axiom 2.2. If n is a natural number, then n+ is also a natural number
 
   data _≡_ : ℕ → ℕ → Set where
-    x≡x : {n : ℕ} → n ≡ n
-    x≡y : {n m : ℕ} → n ≡ m → m ≡ n
-    x≡y≡z : {n m k :  ℕ} → n ≡ m → m ≡ k → n ≡ k
+    refl : {a : ℕ} → a ≡ a
 
-  data _≤_ : ℕ → ℕ → Set where
-    z≤n : {n : ℕ} → zero ≤ n
-    s≤s : {n m : ℕ} → n ≤ m → suc n ≤ suc m
+  axiom23 : {n : ℕ} → ¬ (zero ≡ (n ++))
+  axiom23 = λ ()
 
-  _+_ : ℕ → ℕ → ℕ
-  zero + n = n
-  (suc m) + n = suc (m + n)
+  axiom24 : {n m : ℕ} → (n ++) ≡ (m ++) → n ≡ m
+  axiom24 = {!!}
+
+  _+_ : ℕ → ℕ → ℕ -- Definition 2.2.1
+  zero + m = m
+  (n ++) + m = (n + m) ++
+  
+  lemma222 : (n : ℕ) → (zero + n) ≡ n
+  lemma222 zero = refl
+  lemma222 (n ++) = refl 
