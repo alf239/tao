@@ -31,10 +31,16 @@ module Peano where
   lemma222 zero = refl
   lemma222 (n ++) = ≡-sec (lemma222 n) 
 
-  lemma223 : (n m : ℕ) → (n + (m ++)) ≡ ((n + m) ++)
+  lemma223 :  (n m : ℕ) → (n + (m ++)) ≡ ((n + m) ++)
   lemma223 zero m = refl
   lemma223 (n ++) m = ≡-sec (lemma223 n m)
 
-  proposition224 : (n m : ℕ) → (n + m) ≡ (m + n)
-  proposition224 zero m = ≡-comm (lemma222 m)
-  proposition224 (n ++) m = ≡-trans (≡-sec (proposition224 n m)) ( ≡-comm (lemma223 m n))
+  -- Addition is commutative
+  prop224 : (n m : ℕ) → (n + m) ≡ (m + n)
+  prop224 zero m = ≡-comm (lemma222 m)
+  prop224 (n ++) m = ≡-trans (≡-sec (prop224 n m)) (≡-comm (lemma223 m n))
+
+  -- Addition is associative
+  prop225 : (a b c : ℕ) → ((a + b) + c) ≡ (a + (b + c))
+  prop225 zero b c = refl
+  prop225 (a ++) b c = ≡-sec (prop225 a b c)
