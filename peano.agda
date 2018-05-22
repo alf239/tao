@@ -17,7 +17,14 @@ module Peano where
   _+_ : ℕ → ℕ → ℕ -- Definition 2.2.1
   zero + m = m
   (n ++) + m = (n + m) ++
+
+  ≡-sec : {n m : ℕ} → n ≡ m → (n ++) ≡ (m ++)
+  ≡-sec refl = refl 
   
-  lemma222 : (n : ℕ) → (zero + n) ≡ n
+  lemma222 : (n : ℕ) → (n + zero) ≡ n
   lemma222 zero = refl
-  lemma222 (n ++) = refl 
+  lemma222 (n ++) = ≡-sec (lemma222 n) 
+
+  lemma223 :  (n m : ℕ) → (n + (m ++)) ≡ ((n + m) ++)
+  lemma223 zero m = refl
+  lemma223 (n ++) m =  ≡-sec (lemma223 n m)
