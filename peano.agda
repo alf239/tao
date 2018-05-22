@@ -20,11 +20,21 @@ module Peano where
 
   ≡-sec : {n m : ℕ} → n ≡ m → (n ++) ≡ (m ++)
   ≡-sec refl = refl 
-  
+
+  ≡-comm : {n m : ℕ} → n ≡ m → m ≡ n
+  ≡-comm refl = refl
+
+  ≡-trans : {n m p : ℕ} → n ≡ m → m ≡ p → n ≡ p
+  ≡-trans refl refl = refl
+
   lemma222 : (n : ℕ) → (n + zero) ≡ n
   lemma222 zero = refl
   lemma222 (n ++) = ≡-sec (lemma222 n) 
 
-  lemma223 :  (n m : ℕ) → (n + (m ++)) ≡ ((n + m) ++)
+  lemma223 : (n m : ℕ) → (n + (m ++)) ≡ ((n + m) ++)
   lemma223 zero m = refl
-  lemma223 (n ++) m =  ≡-sec (lemma223 n m)
+  lemma223 (n ++) m = ≡-sec (lemma223 n m)
+
+  proposition224 : (n m : ℕ) → (n + m) ≡ (m + n)
+  proposition224 zero m = ≡-comm (lemma222 m)
+  proposition224 (n ++) m = ≡-trans (≡-sec (proposition224 n m)) ( ≡-comm (lemma223 m n))
