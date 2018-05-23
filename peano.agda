@@ -31,7 +31,7 @@ module Peano where
   lemma222 zero = refl
   lemma222 (n ++) = ≡-sec (lemma222 n) 
 
-  lemma223 :  (n m : ℕ) → (n + (m ++)) ≡ ((n + m) ++)
+  lemma223 : (n m : ℕ) → (n + (m ++)) ≡ ((n + m) ++)
   lemma223 zero m = refl
   lemma223 (n ++) m = ≡-sec (lemma223 n m)
 
@@ -44,3 +44,8 @@ module Peano where
   prop225 : (a b c : ℕ) → ((a + b) + c) ≡ (a + (b + c))
   prop225 zero b c = refl
   prop225 (a ++) b c = ≡-sec (prop225 a b c)
+
+  -- Cancellation law
+  prop226 : (a b c : ℕ) → (a + b) ≡ (a + c) → b ≡ c
+  prop226 zero b c = λ z → z
+  prop226 (a ++) b c = λ z → (prop226 a b c) (axiom24 z)
